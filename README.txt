@@ -1,3 +1,5 @@
+Download the latest toolkit [url=https://github.com/bidi-codes/hosf-grinding-toolkit/releases/tag/v1.0]here[/url]. Extract the zip and double-click hosf_grinding_toolkit.exe.
+
 ============================================================
   Heroes of Science and Fiction - Achievement Grinding Toolkit
 ============================================================
