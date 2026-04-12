@@ -1,0 +1,137 @@
+# 🛠 Grinding Toolkit - Scripts & App
+
+For the really tough grinds (500k tiles, 15k collectibles, 10k turns, 5k sells, 500 portals...) I've put together a small toolkit that automates the repetitive stuff. You can download it [b]here[/b] (link).
+
+It comes with a standalone app (no Python needed, just double-click the .exe) and also the raw Python scripts if you prefer tweaking them yourself.
+
+⚠️ All coordinates in the app/scripts are based on my screen resolution. You'll need to find your own using the [b]Mouse Capture[/b] tool. It takes 2 minutes, don't skip this step.
+
+💡 Before grinding, I highly recommend quadrupling hero movement speed through the registry. It cuts grind time dramatically. See the [b]Speed Up Hero Movement[/b] section above for how to do it.
+
+---
+
+[h2]🖱 Mouse Capture[/h2]
+
+Captures screen coordinates wherever you click. You'll need these for every other tool.
+
+[b]How to use:[/b]
+[olist]
+[*] Start the tool, switch to the game
+[*] Click on the position you need (a tile, a button, whatever)
+[*] The coordinates appear in the list
+[*] Press ESC when done
+[/olist]
+
+Use these coordinates in the other tools. Every screen/resolution is different, so this step is essential.
+
+---
+
+[h2]🔄 Auto End Turn[/h2]
+[i]For: One more turn (end turn 10,000 times)[/i]
+
+Presses E (end turn), then Enter twice (cycle confirmation + player turn confirmation). Runs forever until you press ESC.
+
+[b]Setup:[/b]
+[olist]
+[*] Open the map editor, place only yourself, no enemies
+[*] Set victory condition to "hold base for 10001 turns" so you can track progress
+[*] Disable the "actions still available" popup (the eye icon top-left)
+[*] Start the script, switch to game
+[/olist]
+
+💡 The default delays work fine. If turns are getting skipped, increase "After cycle confirm" a bit.
+
+---
+
+[h2]🚶 Move[/h2]
+[i]For: I will walk 500,000 tiles (cumulative)[/i]
+
+Moves your commander back and forth between two points endlessly, restoring movement after each trip.
+
+[b]Setup:[/b]
+[olist]
+[*] Open the map editor, place your commander alone on a flat map
+[*] Max out Exploration attribute, add Explorer + Globetrotter skills
+[*] Useful artifacts: Fuel Additives, Novicomp, Red Radiant, Recon Drone
+[*] Use Mouse Capture to find your two click points (left and right of commander) and the testtools refill movement button
+[*] Start the script, switch to game
+[/olist]
+
+⚠️ If the commander keeps drifting to one side, adjust the coordinates:
+- Drifting right → decrease Point A x
+- Drifting left → increase Point B x
+
+💡 With quadrupled speed (regedit trick), set Move Time to 1. With normal speed, 2.25 works.
+
+---
+
+[h2]📦 Collect[/h2]
+[i]For: Hoarder (pick up 15,000 equipment) and Yard Sale (sell 5,000 items)[/i]
+
+Traverses the map in a snake pattern, collecting items tile by tile. Goes left on even rows, right on odd rows, one tile up between rows.
+
+[b]Setup:[/b]
+[olist]
+[*] Open the map editor, fill a 40x40 area with collectibles (use the duplicate zone to speed this up)
+[*] Place your commander in the bottom-left corner
+[*] Disable "show picked up item info in a dialog" in settings (saves a LOT of time)
+[*] Use Mouse Capture to find: one tile left, one tile right, one tile up, and the restore button
+[*] Start the script, switch to game
+[/olist]
+
+💡 Each run collects around 1000+ items. You'll need about 15 sessions. I did it in batches, took about 2 hours total. Think of it as therapy clicking :D
+
+💡 When you've cleared a map, visit a Black Market and use the [b]Sell[/b] tool to sell everything. You can also save in front of the market, sell, reload, sell again until you hit 5000.
+
+⚠️ If clicking on commander instead of the tile, adjust:
+- Left tile → increase x
+- Right tile → decrease x
+
+---
+
+[h2]💰 Sell[/h2]
+[i]For: Yard Sale (sell 5,000 items in markets)[/i]
+
+Clicks the Sell button repeatedly. That's it :D
+
+[b]Setup:[/b]
+[olist]
+[*] Visit a Black Market or Traveling Merchant with items in your inventory
+[*] Use Mouse Capture to find the Sell button position
+[*] Start the script, switch to game
+[/olist]
+
+💡 Neat trick: gather 500-1000 items, save in front of the market, sell everything with the script, reload, sell again. Repeat until you hit 5000.
+
+---
+
+[h2]🌀 Town Portal[/h2]
+[i]For: Instant visit (use town portal 500 times)[/i]
+
+Presses G (teleport beam), clicks the first town in the list, clicks Travel. Loops forever.
+
+[b]Setup:[/b]
+[olist]
+[*] You need at least 2 towns of the same faction
+[*] Stay inside one of the towns
+[*] Make sure you have enough aura coins for teleport costs
+[*] Use Mouse Capture to find: the first town in the teleport list and the Travel button
+[*] Start the script, switch to game
+[/olist]
+
+💡 You never have to leave town. The loop is G + 2 clicks, takes about 0.7 seconds per teleport. Done in under 6 minutes.
+
+---
+
+[h2]📥 Download & Requirements[/h2]
+
+[b]App (recommended):[/b] Just download, open the app folder, double-click the .exe. No setup needed.
+
+[b]Scripts:[/b] If you want to modify the code:
+[olist]
+[*] Install Python from [url=https://python.org]python.org[/url] (check "Add to PATH" during install)
+[*] Open a terminal: [code]pip install pyautogui pynput[/code]
+[*] Edit parameters in the script, run with: [code]python script_name.py[/code]
+[/olist]
+
+All tools stop with ESC. All tools have a 5-second delay before starting so you can switch to the game window.
