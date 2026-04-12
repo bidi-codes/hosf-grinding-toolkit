@@ -157,8 +157,8 @@ def build_end_turn_tab(notebook):
 
     make_section_label(tab, "Auto End Turn")
     make_help_label(tab, "Presses E (end turn), then Enter twice (cycle + player confirmations).\n"
-                         "Runs until you press ESC. Great for the 10,000 turns achievement.\n"
-                         "Make sure to disable the 'actions still available' popup in-game.")
+                         "Runs until you press ESC. Great for the 10 000 turns achievement \"One more turn\".\n"
+                         "IMPORTANT: Make sure you go to OPTIONS in-game and disable \"Show dialog about available actions at the end of turn\".")
 
     make_section_label(tab, "Delays (seconds)")
     e_delay = make_field(tab, "After E press:", "0.1", 0, "delay after pressing E to end turn")
@@ -175,71 +175,38 @@ def build_end_turn_tab(notebook):
             return
 
         stop_event.clear()
-        d_e = float(e_delay.get())
-        d_c = float(c_delay.get())
-        d_p = float(p_delay.get())
 
-        def loop():
-            global active_thread
-            turn = 0
-            while not stop_event.is_set():
-                turn += 1
-                keyboard_ctrl.press('e')
-                keyboard_ctrl.release('e')
-                time.sleep(d_e)
-                keyboard_ctrl.press(Key.enter)
-                keyboard_ctrl.release(Key.enter)
-                time.sleep(d_c)
-                keyboard_ctrl.press(Key.enter)
-                keyboard_ctrl.release(Key.enter)
-                time.sleep(d_p)
-                if turn % 10 == 0:
-                    status_var.set(f"Running... Turn {turn}")
-            status_var.set(f"Stopped after {turn} turns.")
-            active_thread = None
-
-        active_thread = threading.Thread(target=loop, daemon=True)
-        active_thread.start()
-        status_var.set("Starting in 5 seconds... switch to game!")
-        # Delay start
-        def delayed_start():
-            time.sleep(5)
-            if not stop_event.is_set():
-                status_var.set("Running... Turn 0")
-        threading.Thread(target=delayed_start, daemon=True).start()
-
-    # Actually, let me redo this with the 5-second delay built into the loop
-    def run_end_turn_v2():
-        global active_thread
-        if is_running():
-            status_var.set("⚠ Another script is running. Stop it first.")
+        try:
+            d_e = float(e_delay.get())
+            d_c = float(c_delay.get())
+            d_p = float(p_delay.get())
+        except ValueError:
+            status_var.set("⚠ Invalid delay values. Please enter valid numbers.")
             return
-
-        stop_event.clear()
-        d_e = float(e_delay.get())
-        d_c = float(c_delay.get())
-        d_p = float(p_delay.get())
 
         def loop():
             global active_thread
             status_var.set("Starting in 5 seconds... switch to game!")
-            time.sleep(5)
-            turn = 0
+            time.sleep(5)  # Initial delay to allow the user to switch to the game
+
             while not stop_event.is_set():
-                turn += 1
+                # Press 'E' to end the turn
                 keyboard_ctrl.press('e')
                 keyboard_ctrl.release('e')
                 time.sleep(d_e)
+
+                # Press 'Enter' for cycle confirmation
                 keyboard_ctrl.press(Key.enter)
                 keyboard_ctrl.release(Key.enter)
                 time.sleep(d_c)
+
+                # Press 'Enter' for player confirmation
                 keyboard_ctrl.press(Key.enter)
                 keyboard_ctrl.release(Key.enter)
                 time.sleep(d_p)
-                if turn % 10 == 0:
-                    status_var.set(f"Running... Turn {turn}")
-            status_var.set(f"Stopped after {turn} turns.")
-            active_thread = None
+
+                # Display a generic running message
+                status_var.set("Running... Press ESC to stop.")
 
         active_thread = threading.Thread(target=loop, daemon=True)
         active_thread.start()
@@ -249,7 +216,7 @@ def build_end_turn_tab(notebook):
 
     start_btn = tk.Button(btn_frame, text="▶ Start", font=("Consolas", 10, "bold"),
                           bg="#a6e3a1", fg="#1e1e2e", relief="flat", padx=16, pady=6,
-                          cursor="hand2", command=run_end_turn_v2)
+                          cursor="hand2", command=run_end_turn)
     start_btn.pack(side="left", padx=(0, 8))
 
     stop_btn = tk.Button(btn_frame, text="⏹ Stop", font=("Consolas", 10, "bold"),
@@ -272,7 +239,7 @@ def build_move_tab(notebook):
 
     make_section_label(tab, "Auto Move (Left-Right)")
     make_help_label(tab, "Moves commander back and forth between two points.\n"
-                         "For the 500,000 tiles achievement. Restores movement after each trip.\n"
+                         "For the 500 000 tiles achievement \"I will walk 500 000 tiles\". Restores movement after each trip.\n"
                          "Use Mouse Capture tab to find coordinates.")
 
     make_section_label(tab, "Click Positions")
@@ -284,7 +251,7 @@ def build_move_tab(notebook):
     r_y = make_field(tab, "Restore  y:", "15", 5)
 
     make_section_label(tab, "Timing")
-    move_time = make_field(tab, "Move time:", "1", 6, "seconds to reach point (1 for 4x speed, 2.25 for normal)")
+    move_time = make_field(tab, "Move time:", "1", 6, "seconds to reach point (1 for 4x commander speed, 2.25 for normal speed)")
     restore_delay = make_field(tab, "Restore delay:", "0.1", 7, "seconds after clicking restore")
 
     status_var = tk.StringVar(value="Ready")
@@ -375,7 +342,7 @@ def build_collect_tab(notebook):
 
     make_section_label(scroll_frame, "Auto Collect (Snake Pattern)")
     make_help_label(scroll_frame, "Traverses the map in a snake pattern collecting items tile by tile.\n"
-                                  "For the 15,000 collectibles and 5,000 sell achievements.\n"
+                                  "For the 15 000 collectibles \"Hoarder\" and 5 000 sell \"Yard sale\" achievements.\n"
                                   "Place commander in bottom-left corner of a map filled with items.\n"
                                   "Uses click + M + click + M per tile to collect and move.")
 
@@ -505,7 +472,7 @@ def build_sell_tab(notebook):
 
     make_section_label(tab, "Auto Sell")
     make_help_label(tab, "Clicks the Sell button repeatedly.\n"
-                         "For the 5,000 items sold achievement.\n"
+                         "For the 5 000 items sold achievement \"Yard sale\".\n"
                          "Open a Black Market or Traveling Merchant first, then start.")
 
     make_section_label(tab, "Button Position")
@@ -572,8 +539,8 @@ def build_town_portal_tab(notebook):
 
     make_section_label(tab, "Auto Town Portal")
     make_help_label(tab, "Presses G (teleport beam), clicks town from list, clicks Travel.\n"
-                         "For the 500 town portal uses achievement.\n"
-                         "You need at least 2 towns of the same faction. Stay inside a town.")
+                         "For the 500 town portal uses achievement \"Instant visit\".\n"
+                         "You need at least 2 towns. Stay inside a town.")
 
     make_section_label(tab, "Click Positions")
     t_x = make_field(tab, "Town select x:", "829", 0, "first town in the teleport list")
