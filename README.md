@@ -1,4 +1,4 @@
-Download the latest toolkit [here](https://github.com/bidi-codes/hosf-grinding-toolkit/releases/tag/v1.0). Extract the zip and double-click hosf_grinding_toolkit.exe.
+Download the latest toolkit [here](https://github.com/bidi-codes/hosf-grinding-toolkit/releases/tag/v1.1). Extract the zip and double-click hosf_grinding_toolkit.exe.
 
 ---
 
