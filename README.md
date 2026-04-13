@@ -59,10 +59,14 @@ A collection of automation tools to help with the toughest achievement grinds in
 
 ## TROUBLESHOOTING
 
-- **"It clicks in the wrong spot"** — Your resolution is different. Use Mouse Capture to find new coordinates.
-- **"Commander drifts to one side"** (Move tool) — Adjust Point A or Point B. The labels in the app explain which way.
-- **"Script runs too fast / too slow"** — Adjust the delay values. Start with higher values and decrease.
-- **"Exe won't start" / antivirus blocks it** — PyInstaller exes sometimes trigger false positives. Add an exception or use the Python scripts directly.
+- **"It clicks in the wrong spot"** - Your resolution is different. Use Mouse Capture to find new coordinates.
+- **"Commander drifts to one side"** (Move tool) - Adjust Point A or Point B. The labels in the app explain which way.
+- **"Script runs too fast / too slow"** - Adjust the delay values. Start with higher values and decrease.
+- **"Exe won't start" / antivirus blocks it** - PyInstaller exes sometimes trigger false positives. Add an exception or use the Python scripts directly.
+
+---
+
+For detailed setup instructions for each tool, see [toolkit_guide_section.txt](https://github.com/bidi-codes/hosf-grinding-toolkit/blob/main/toolkit_guide_section.txt).
 
 ---
 
