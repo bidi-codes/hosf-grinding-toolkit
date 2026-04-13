@@ -49,10 +49,10 @@ A collection of automation tools to help with the toughest achievement grinds in
 | Tool | Description | Achievement |
 |------|-------------|-------------|
 | Mouse Capture | Find screen coordinates by clicking | required for all other tools |
-| End Turn | Auto end turn | One more turn (10,000 turns) |
-| Move | Auto left-right movement | I will walk 500,000 tiles |
-| Collect | Snake pattern item collection | Hoarder (15,000 items) |
-| Sell | Auto sell at markets | Yard sale (5,000 sells) |
+| End Turn | Auto end turn | One more turn (10 000 turns) |
+| Move | Auto left-right movement | I will walk 500 000 tiles |
+| Collect | Snake pattern item collection | Hoarder (15 000 items) |
+| Sell | Auto sell at markets | Yard sale (5 000 sells) |
 | Town Portal | Auto teleport between towns | Instant visit (500 portals) |
 
 ---
